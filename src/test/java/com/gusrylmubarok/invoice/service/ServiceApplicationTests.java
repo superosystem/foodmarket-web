@@ -1,10 +1,10 @@
-package com.gusrylmubarok.invoice;
+package com.gusrylmubarok.invoice.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class InvoiceManagementSpringApplicationTests {
+class ServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
