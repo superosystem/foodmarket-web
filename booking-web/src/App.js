@@ -1,14 +1,30 @@
-import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+
+import Home from './pages/home/Home';
+import Hotel from './pages/hotel/Hotel';
+import Hotels from './pages/hotels/Hotels';
 
 function App() {
+  const routes = createBrowserRouter([
+    {
+      path: '/',
+      element: <Home />
+    },
+    {
+      path: '/hotels',
+      element: <Hotels />
+    },
+    {
+      path: '/hotels/:id',
+      element: <Hotel />
+    },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Hello World!
-        </p>
-      </header>
-    </div>
+    <RouterProvider router={routes} />
   );
 }
 
