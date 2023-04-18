@@ -11,27 +11,38 @@ class Transaction extends Model
 {
     use HasFactory, SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'food_id', 'user_id', 'quantity', 'total', 'status', 'payment_url'
+        'food_id',
+        'user_id',
+        'quantity',
+        'total',
+        'status',
+        'payment_url'
     ];
 
-    //For table relationship
-    public function food(){
-        return $this->hasOne(Food::class, 'id', 'food_id');
-
+    public function food()
+    {
+        return $this->hasOne(Food::class,'id','food_id');
     }
 
-    public function user(){
-        return $this->hasOne(User::class, 'id', 'user_id');
-
+    public function user()
+    {
+        return $this->hasOne(User::class,'id','user_id');
     }
 
-    //Asesor for changing date format
-    public function getCreatedAtAttribute($value){
-        return Carbon::parse($value)->timestamp;
+    public function getCreatedAtAttribute($created_at)
+    {
+        return Carbon::parse($created_at)
+            ->getPreciseTimestamp(3);
     }
-
-    public function getUpdatedAtAttribute($value){
-        return Carbon::parse($value)->timestamp;
+    public function getUpdatedAtAttribute($updated_at)
+    {
+        return Carbon::parse($updated_at)
+            ->getPreciseTimestamp(3);
     }
 }

@@ -5,7 +5,7 @@ test:
 	./vendor/bin/phpunit
 
 controller:
-	php artisan make:controller $(name)
+	php artisan make:controller $(name) --resource
 
 controller-api:
 	php artisan make:controller Api/$(name)
