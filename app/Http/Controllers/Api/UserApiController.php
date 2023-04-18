@@ -22,7 +22,7 @@ class UserApiController extends Controller
      */
     public function fetch(Request $request)
     {
-        return ResponseApiFormatter::api_success($request->user(),'Data profile user berhasil diambil');
+        return ResponseApiFormatter::api_success($request->user(), 'Data profile user berhasil diambil');
     }
 
     /**
@@ -57,12 +57,12 @@ class UserApiController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user
-            ],'User Registered');
+            ], 'User Registered');
         } catch (Exception $error) {
             return ResponseApiFormatter::api_error([
                 'message' => 'Something went wrong',
                 'error' => $error,
-            ],'Authentication Failed', 500);
+            ], 'Authentication Failed', 500);
         }
     }
 
@@ -83,11 +83,11 @@ class UserApiController extends Controller
             if (!Auth::attempt($credentials)) {
                 return ResponseApiFormatter::api_error([
                     'message' => 'Unauthorized'
-                ],'Authentication Failed', 500);
+                ], 'Authentication Failed', 500);
             }
 
             $user = User::where('email', $request->email)->first();
-            if ( ! Hash::check($request->password, $user->password, [])) {
+            if (!Hash::check($request->password, $user->password, [])) {
                 throw new \Exception('Invalid Credentials');
             }
 
@@ -96,12 +96,12 @@ class UserApiController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user
-            ],'Authenticated');
+            ], 'Authenticated');
         } catch (Exception $error) {
             return ResponseApiFormatter::api_error([
                 'message' => 'Something went wrong',
                 'error' => $error,
-            ],'Authentication Failed', 500);
+            ], 'Authentication Failed', 500);
         }
     }
 
@@ -109,7 +109,7 @@ class UserApiController extends Controller
     {
         $token = $request->user()->currentAccessToken()->delete();
 
-        return ResponseApiFormatter::api_success($token,'Token Revoked');
+        return ResponseApiFormatter::api_success($token, 'Token Revoked');
     }
 
     public function updateProfile(Request $request)
@@ -119,7 +119,7 @@ class UserApiController extends Controller
         $user = Auth::user();
         $user->update($data);
 
-        return ResponseApiFormatter::api_success($user,'Profile Updated');
+        return ResponseApiFormatter::api_success($user, 'Profile Updated');
     }
 
     public function updatePhoto(Request $request)
@@ -129,7 +129,7 @@ class UserApiController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return ResponseApiFormatter::api_error(['error'=>$validator->errors()], 'Update Photo Fails', 401);
+            return ResponseApiFormatter::api_error(['error' => $validator->errors()], 'Update Photo Fails', 401);
         }
 
         if ($request->file('file')) {
@@ -141,7 +141,7 @@ class UserApiController extends Controller
             $user->profile_photo_path = $file;
             $user->update();
 
-            return ResponseApiFormatter::api_success([$file],'File successfully uploaded');
+            return ResponseApiFormatter::api_success([$file], 'File successfully uploaded');
         }
     }
 }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('roles')->default('USER');
             $table->rememberToken();
 
-            $table->string('current_team_id')->nullable();
+            $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
 
             $table->text('address')->nullable();

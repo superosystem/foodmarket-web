@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\FoodApiController;
+use App\Http\Controllers\Api\UserApiController;
+use App\Http\Controllers\API\MidtransApiController;
+use App\Http\Controllers\Api\TransactionApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,19 +18,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'v1'], function () {
+    // Auth
     Route::post('login', [UserApiController::class, 'login']);
     Route::post('register', [UserApiController::class, 'register']);
-
+    // Food
+    Route::get('food', [FoodApiController::class, 'all']);
+    // Midtrans
+    Route::post('midtrans/callback', [MidtransApiController::class, 'callback']);
+    // Middleware
     Route::middleware('auth:sanctum')->group(function () {
         // auth: logout
         Route::post('logout', [UserApiController::class, 'logout']);
-
         // User Endpoint
         Route::group(['prefix' => 'user'], function () {
+            // User
             Route::get('', [UserApiController::class, 'fetch']);
             Route::post('', [UserApiController::class, 'updateProfile']);
             Route::post('/photo', [UserApiController::class, 'updatePhoto']);
         });
-
+        // Transaction Endpoint
+        Route::group(['prefix' => 'transaction'], function () {
+            Route::get('', [TransactionApiController::class, 'all']);
+            Route::post('{id}', [TransactionApiController::class, 'update']);
+        });
+        //Checkout
+        Route::post('checkout', [TransactionApiController::class, 'checkout']);
     });
 });
