@@ -25,6 +25,12 @@ migrate-reset:
 migrations:
 	php artisan make:migration $(name)
 
+seeder:
+	php artisan make:seeder $(name)
+
+seed:
+	php artisan db:seed
+
 db-container-start:
 	docker compose -f docker-compose-dev.yml up
 

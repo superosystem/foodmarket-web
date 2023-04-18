@@ -35,10 +35,13 @@ Route::group(['prefix' => 'v1'], function () {
             Route::get('', [UserApiController::class, 'fetch']);
             Route::post('', [UserApiController::class, 'updateProfile']);
             Route::post('/photo', [UserApiController::class, 'updatePhoto']);
-            // Transaction
-            Route::get('transaction', [TransactionApiController::class, 'all']);
-            Route::post('transaction/{id}', [TransactionApiController::class, 'update']);
-            Route::post('checkout', [TransactionApiController::class, 'checkout']);
         });
+        // Transaction Endpoint
+        Route::group(['prefix' => 'transaction'], function () {
+            Route::get('', [TransactionApiController::class, 'all']);
+            Route::post('{id}', [TransactionApiController::class, 'update']);
+        });
+        //Checkout
+        Route::post('checkout', [TransactionApiController::class, 'checkout']);
     });
 });

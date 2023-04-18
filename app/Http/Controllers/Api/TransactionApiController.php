@@ -56,6 +56,7 @@ class TransactionApiController extends Controller
      */
     public function checkout(Request $request)
     {
+        // Status (delivered, on_delivery, pending, cancelled)
         $request->validate([
             'food_id' => 'required|exists:food,id',
             'user_id' => 'required|exists:users,id',
