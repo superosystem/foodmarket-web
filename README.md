@@ -2,6 +2,8 @@
 
 Food Market Web is website for food market product. This application build by Laravel v10.
 
+- [Testing with Postman](https://www.postman.com/gusrylmubarok/workspace/food-market-backend)
+
 ## Development
 
 Prepare for development this application.
@@ -60,5 +62,3 @@ Prepare for development this application.
   - Total
   - Status (delivered, on_delivery, pending, cancelled)
   - Payment Url
-
-

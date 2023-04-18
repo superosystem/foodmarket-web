@@ -1,3 +1,15 @@
+run:
+	php artisan serve
+
+test:
+	./vendor/bin/phpunit
+
+controller:
+	php artisan make:controller $(name)
+
+controller-api:
+	php artisan make:controller Api/$(name)
+
 model:
 	php artisan make:model $(name)
 

@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'v1'], function () {
+    Route::post('login', [UserApiController::class, 'login']);
+    Route::post('register', [UserApiController::class, 'register']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        // auth: logout
+        Route::post('logout', [UserApiController::class, 'logout']);
+
+        // User Endpoint
+        Route::group(['prefix' => 'user'], function () {
+            Route::get('', [UserApiController::class, 'fetch']);
+            Route::post('', [UserApiController::class, 'updateProfile']);
+            Route::post('/photo', [UserApiController::class, 'updatePhoto']);
+        });
+
+    });
 });
