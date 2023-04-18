@@ -31,6 +31,8 @@ Prepare for development this application.
 
 ### Database
 
+![erd](docs/erd.png)
+
 - Food
   - Name
   - Description
@@ -59,4 +61,4 @@ Prepare for development this application.
   - Status (delivered, on_delivery, pending, cancelled)
   - Payment Url
 
-![erd](docs/erd.png)
+

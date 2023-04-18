@@ -1,3 +1,6 @@
+model:
+	php artisan make:model $(name)
+
 migrate:
 	php artisan migrate
 
